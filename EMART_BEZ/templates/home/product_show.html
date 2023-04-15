@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+    <title>Product_data</title>
+</head>
+<body>
+<h1 align="center"> Product List</h1>
+
+{% if form %}
+<table border="1px" align="center">
+
+    <thead>
+    <th>product_id</th>
+<th> product_name</th>
+<th>Product_brand</th>
+<th>Product_category</th>
+<th>product_cost</th>
+<th>product_releasedate</th>
+    <th>product_description</th>
+    <th>product_image</th>
+    </thead>
+{% for Showuser in form %}
+ <tr>
+     <td>{{Showuser.prd_id}}</td>
+     <td>{{Showuser.product_name}}</td>
+     <td>{{Showuser.Product_brand}}</td>
+     <td>{{Showuser.Product_category}}</td>
+     <td>{{Showuser.product_cost}}</td>
+     <td>{{Showuser.product_releasedate}}</td>
+     <td>{{Showuser.product_description}}</td>
+     <td><img src="{{Showuser.product_image.url}}" height="30px"></td>
+
+     <td><a href="/user/" class="btn btn-success">Buy</a></td>
+<!--     <td><a href="/user/delete/{{Showuser.id}}" class="btn btn-danger"></a></td>-->
+
+ </tr>
+
+{%endfor%}
+</table>
+{%else%}
+<h1> no data found</h1>
+{%endif%}
+<center>
+<!--<a href="/user/insert/" class="btn btn-danger">insert</a>-->
+    </center>
+
+</body>
+{%endblock%}
+</html>

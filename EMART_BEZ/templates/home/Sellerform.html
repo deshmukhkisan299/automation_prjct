@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+    <title>Sellerform</title>
+</head>
+<body>
+<h1 align="center">Seller Form </h1>
+<div class="container" align="center">
+    <form method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" value="submit">
+    </form>
+</div>
+
+</body>
+{%endblock%}
+</html>

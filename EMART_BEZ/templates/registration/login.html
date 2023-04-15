@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body><center><h1>LOG-IN PAGE</h1>
+  <form method="POST">
+    {{form.as_p}}
+    {%csrf_token%}
+    <input type="submit">
+
+  </form>
+
+    <a href="/sign_up/" class="btn btn-success">SignUp</a>
+</center>
+
+
+</body>
+{%endblock%}
+</html>
