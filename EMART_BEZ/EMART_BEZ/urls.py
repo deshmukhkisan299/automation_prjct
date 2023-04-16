@@ -21,6 +21,7 @@ from SignUp import views as V1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', V2.Home_view),
     path('user/', views.User_view),
     path('seller/', views.Seller_view),
     path('product/', views.Product_view),

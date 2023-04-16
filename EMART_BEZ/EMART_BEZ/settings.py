@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'emart',
-        'HOST':'DESKTOP-UIL6L6A\SQLEXPRESS',
+        'HOST':'LAPTOP-3ESN7AVF\ROOT',
         'OPTIONS': {"driver": "ODBC Driver 17 for SQL Server"},
 
     }
