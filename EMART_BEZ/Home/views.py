@@ -8,6 +8,7 @@ from .models import Seller_Model
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required()
 def product_show(r):
     form = Product_Model.objects.all()
     return render(r,'home/product_show.html',{'form':form})
@@ -22,7 +23,7 @@ def User_view(r):
             form.save()
             return HttpResponseRedirect('/home')
     return render(r,'home/userform.html',{'form':form})
-
+@login_required()
 def Seller_view(r):
     form=Sellerform()
     if r.method=="POST":
@@ -33,7 +34,7 @@ def Seller_view(r):
     return render(r,'home/Sellerform.html',{'form':form})
 
 
-
+@login_required()
 def Product_view(r):
     form=Productform()
     if r.method=="POST":
@@ -43,5 +44,12 @@ def Product_view(r):
             return HttpResponseRedirect('/productshow')
     return render(r,'home/Productform.html',{'form':form})
 
+@login_required()
+def Selection_View(r):
+    return render(r,'home/selection.html')
 
-
+def Home_view(r):
+    form = Product_Model.objects.all()
+    return render(r, 'home/product_show.html', {'form': form})
+def login(r):
+    return render(r,'registration/login.html')

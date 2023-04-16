@@ -6,17 +6,18 @@
 <head>
     <meta charset="UTF-8">
 <a href="/accounts/logout/" class="btn btn-success">LogOut</a>
-    <title>Userform</title>
+    <title>Place Order</title>
 </head>
 
 <body>
 
-<h1 align="center">User form </h1>
+<h1 align="center">Place Order </h1>
 <div class="container" align="center">
     <form method="post">
         {{form.as_p}}
         {% csrf_token %}
-        <input type="submit" value="submit">
+      <a href="/" class="btn btn-success">Back</a> <input type="submit" value="submit">
+
     </form>
 </div>
 

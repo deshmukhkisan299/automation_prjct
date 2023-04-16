@@ -28,6 +28,8 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')),
     path('sign_up/',V1.sign_up),
     path('profile/',V2.update_profile),
-    path('home/',V2.Home_view),
+    path('',views.Home_view),
+    path('selection/',views.Selection_View),
+    path('login/',views.login),
 ]
 

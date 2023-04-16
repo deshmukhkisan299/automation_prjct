@@ -33,5 +33,3 @@ def update_profile(request):
     #     user_profile_form = UserProfileForm(instance=request.user.userprofile)
     return render(request, "home/profile.html")
 
-def Home_view(r):
-    return render(r,'home/home.html')
