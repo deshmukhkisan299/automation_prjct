@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+
+    <title>Place Order</title>
+</head>
+
+<body>
+
+<h1 align="center">Place Order </h1>
+<div class="container" align="center">
+    <form method="post">
+        <input type="text" name="quantity" />
+        <input type="text" name="user_mob_no" />
+        <input type="hidden" value="{{form.product_cost}}" name="product_cost"/>
+        {% csrf_token %}
+<a href="/" class="btn btn-success">Back</a> <input  type="submit" value="Continue"/>
+
+    </form>
+</div>
+
+
+</body>
+{%endblock%}
+</html>
+
+
+
