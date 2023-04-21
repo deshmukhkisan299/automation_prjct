@@ -25,8 +25,8 @@ urlpatterns = [
     path('seller/', views.Seller_view),
     path('product/', views.Product_view),
     path('productshow/', views.product_show),
-    path('accounts/',include('django.contrib.auth.urls')),
     path('sign_up/',V1.sign_up),
+    path('sign_up1/',views.SignUp1),
     # path('profile/',V2.update_profile),
     path('',views.Home_view),
     path('view/',views.view),
@@ -35,5 +35,12 @@ urlpatterns = [
      path('payment/<int:id>/',views.payment),
     path('detail/<int:id>/',views.detail),
     path('add_to_cart/',views.Cartview),
+    path("update/<id>/", views.update),
+    path("delete/<id>/", views.delete),
+    path("remove_cart/<id>/", views.remove_cart),
+    path("login/", views.login),
+    path("logout/", views.logout),
+    path("show_cart/", views.show_add_to_cart),
+
 ]
 

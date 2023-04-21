@@ -11,14 +11,15 @@
 
 <body>
 
-<h1 align="center">Place Order </h1>
+<h1 align="center">Place Order </h1><br><br>
 <div class="container" align="center">
     <form method="post">
-        <input type="text" name="quantity" />
-        <input type="text" name="user_mob_no" />
+        Quantity of Prduct :  <input type="text" name="quantity" />
+        Mobile no : <input type="text" name="user_mob_no" />
         <input type="hidden" value="{{form.product_cost}}" name="product_cost"/>
         {% csrf_token %}
-<a href="/" class="btn btn-success">Back</a> <input  type="submit" value="Continue"/>
+ <input  type="submit" class="btn btn-success" value="Continue"/><br><br>
+        <a href="/" class="btn btn-success">Back</a>
 
     </form>
 </div>

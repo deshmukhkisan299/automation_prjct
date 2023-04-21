@@ -9,7 +9,7 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-      <title>Python World</title>
+      <title>EMART PRODUCT</title>
       <style>
          nav{
          background-color: white;
@@ -45,27 +45,27 @@
             <ul class=" navbar-nav my-2 my-lg-0">
                <li class="nav-item active dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Praveen
+                  {{name}}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                      <a class="dropdown-item" href="#">Orders</a>
-                     <a class="dropdown-item" href="/accounts/logout/">Logout</a>
+                     <a class="dropdown-item" href="/logout/">Logout</a>
                   </div>
                </li>
                <li class="nav-item active">
-                  <a class="nav-link" href="#">Cart
-                  <span class="badge bg-danger">4</span>
-                  <span class="sr-only">(current)</span></a>
+                  <a class="nav-link text-white"  href="/show_cart/"><span class="badge bg-danger">{{totalitem}}</span> Cart</a>
                </li>
                <li class="nav-item active">
                   <a class="nav-link text" href="/productshow/">SellProduct<span class="sr-only"></span></a>
                </li>
+
                <li class="nav-item active">
                   <a class="nav-link" href="/login">Login<span class="sr-only"></span></a>
                </li>
                <li class="nav-item active">
-                  <a class="nav-link text" href="/productshow/">SignUp<span class="sr-only"></span></a>
+                  <a class="nav-link text" href="/sign_up1/">SignUp<span class="sr-only"></span></a>
                </li>
+
             </ul>
          </div>
       </nav>

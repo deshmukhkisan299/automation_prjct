@@ -4,9 +4,14 @@
 {%block baseblock%}
 <head>
     <meta charset="UTF-8">
+
     <title>Product_data</title>
-</head>
+</head><hr>
 <body>
+
+<center>
+    <div class="container my-50">
+<div class="shadow p-5>
 <h1 align="center"> Product List</h1>
 
 {% if form %}
@@ -33,22 +38,25 @@
      <td>{{Showuser.product_description}}</td>
      <td><img src="{{Showuser.product_image.url}}" height="30px"></td>
 
-     <td><a href="/customer/update/{{Showuser.id}}" class="btn btn-success">update</a></td>
-     <td><a href="/customer/delete/{{Showuser.id}}" class="btn btn-danger">delete</a></td>
+     <td><a href="/update/{{Showuser.id}}" class="btn btn-success">update</a></td>
+     <td><a href="/delete/{{Showuser.id}}" class="btn btn-danger">delete</a></td>
 
 
  </tr>
-
 {%endfor%}
 </table>
-
+        <a href="/product/" class="btn btn-success">insert</a>
+</div>
 {%else%}
 <h1> no data found</h1>
 {%endif%}
-<center>
-<a href="/product/" class="btn btn-success">insert</a>
+
+
     </center>
 
 </body>
+</div>
+</div>
 {%endblock%}
+
 </html>
