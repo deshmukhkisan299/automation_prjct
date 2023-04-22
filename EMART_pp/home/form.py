@@ -1,7 +1,5 @@
 from django import forms
-from .models import Usermode
-from .models import Seller_Model
-from .models import Product1
+from .models import Usermode, Seller_Model, Product1
 
 
 class Userform(forms.ModelForm):

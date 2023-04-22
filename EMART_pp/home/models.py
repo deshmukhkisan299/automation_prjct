@@ -23,7 +23,8 @@ class Product1(models.Model):
     Product_brand = models.CharField(max_length=30)
     Product_category = models.CharField(max_length=30)
     product_cost = models.IntegerField()
-    product_image = models.ImageField(upload_to='static/media')
+    prod_quantity = models.IntegerField(default=1)
+    product_image = models.ImageField(upload_to='static/media/')
     product_releasedate = models.DateField()
     product_description = models.CharField(max_length=60)
 

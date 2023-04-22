@@ -1,10 +1,11 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect,HttpResponse
 from .form import Userform,Sellerform,Productform
-from .models import Usermode,Seller_Model,Customer1
-from .models import Product1,Cart1
+from .models import Usermode,Seller_Model,Customer1, Product1,Cart1
 from home import calc
 from django.contrib import messages
 from django.db.models import Q
+from django.db import connection
+myconn = connection.cursor()
 # Create your views here.
 
 
@@ -79,7 +80,7 @@ def view(r):
 def update(r,id):
     abc= Product1.objects.get(id=id)
     if r.method=="POST":
-        form=Productform(r.POST,instance=abc)
+        form=Productform(r.POST, r.FILES, instance=abc)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/productshow')
@@ -114,6 +115,12 @@ def detail(r,id):
             'totalitem':totalitem
 
         }
+        if r.method=="POST":
+            r.session['prd_id'] = form.id
+            r.session['cost'] = r.POST['Prod_cost']
+            r.session['quant'] = r.POST['quant']
+            
+            return HttpResponseRedirect(f'/user/{form.id}')
         return render(r,'product_detail.html',data)    #{'form':form}
 
 
@@ -126,21 +133,19 @@ def detail(r,id):
 
 def User_view(r,id):
     obj=Product1.objects.get(id=id)
-    form=Userform()
-    global det
-    det={'id':obj.id}
-    if r.method=="POST":
-
-        det['qunt']=r.POST['quantity1']
-        det['cost']=r.POST['product_cost']
-
-        print(qunt,cost,obj.id)
+    data={
+        'obj':obj,
+        'fetched_cost': obj.product_cost,
+        'fetched_quant':r.session['quant'],
+        'total': int(obj.product_cost)*int(r.session['quant'])
+        }
+     
         # form=Userform(r.POST)
         # if form.is_valid():
         #     form.save()
         # return HttpResponseRedirect(f"/payment/{obj.id}/")
 
-    return render(r,'home/userform.html',{'form':obj,'ob':form})
+    return render(r,'home/userform.html',data)
 
 
 
@@ -243,6 +248,7 @@ def Cartview(r):
         product_cost= p.product_cost
         Cart1(phone=phone,Product_brand=product_name,product_image=product_image,product_cost=product_cost).save()
         return redirect(f"/detail/{product_id}")
+        
 
 
 def show_add_to_cart(r):
@@ -254,3 +260,25 @@ def remove_cart(r,id):
     abc = Cart1.objects.get(id=id)
     abc.delete()
     return HttpResponseRedirect('/show_cart')
+    
+def success(r):
+    cls_s_id = r.session['prd_id']
+    cls_quant_id = r.session['quant']
+    obj = Product1.objects.get(id=cls_s_id)
+    remaining_quant = obj.prod_quantity-int(cls_quant_id)
+    myconn.execute(f'update home_product1 set prod_quantity={remaining_quant} where id= {cls_s_id}')
+    myconn.commit()
+    myconn.close()
+    del cls_s_id
+    del cls_quant_id
+    del r.session['quant']
+    
+    
+    
+    print('done')
+    return render(r, 'home/success.html')
+    
+    
+    
+    
+

@@ -41,6 +41,6 @@ urlpatterns = [
     path("login/", views.login),
     path("logout/", views.logout),
     path("show_cart/", views.show_add_to_cart),
-
+    path("success/", views.success)
 ]
 

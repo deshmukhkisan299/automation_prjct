@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%block baseblock%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><hr>
+
+<body>
+<center>
+
+  <div class="container my-50">
+
+   <div class="shadow p-3">
+      <form method="POST" align="center" enctype="multipart/form-data">
+            <h1> User Update Form</h1><hr>
+           
+          product company name  :  
+          <input type="text"  name="product_name" value="{{abc.product_name}}" placeholder="Enter Name"><br><br>
+          Brand Product  :  
+          <input type="text" name="Product_brand" value="{{abc.Product_brand}}" placeholder="Enter Brand"><br><br>
+          category of product  :  
+          <input type="text" name="Product_category" value="{{abc.Product_category}}" placeholder="Enter Category"><br><br>
+          Cost of Product  :  
+          <input type="text" name="product_cost" value="{{abc.product_cost}}" placeholder="Enter Cost"><br><br>
+          Image of Product  :  
+          <input type="file" name="product_image" value="{{abc.product_image}}" placeholder="Choose Image"><br><br>
+          Product Quantity  :  
+          <input type="Number" name="prod_quantity" value="{{abc.prod_quantity}}" placeholder="Quantity"><br><br>
+          product release date  :  
+          <input type="text" name="product_releasedate" value="{{abc.product_releasedate}}" placeholder="DD/MM/YYYY"><br><br>
+          Description of  :  
+          <input type="text" name="product_description" value="{{abc.product_description}}" placeholder="Enter Details"><br><br>
+
+
+          {%csrf_token%}
+          <input type="submit" class="btn btn-success" value="update"><br><br>
+
+      </form>
+  </div>
+  </div>
+{%endblock%}
+</body>
+</center>
+</html>

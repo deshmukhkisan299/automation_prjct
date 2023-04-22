@@ -71,8 +71,8 @@ WSGI_APPLICATION = 'EMART_pp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'emart',
-        'HOST':'DESKTOP-4IH7NH8\SQLEXPRESS',
+        'NAME': 'emart2',
+        'HOST':'LAPTOP-3ESN7AVF\ROOT',
         'OPTIONS': {"driver": "ODBC Driver 17 for SQL Server"},
 
     }

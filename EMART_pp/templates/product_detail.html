@@ -8,28 +8,31 @@
             <img   src="{{form.product_image.url}}" alt="" class="img-fluid img-thumbnail">
         </div>
         <div class="col-sm-5 offset-sm-1">
+            <div style="position:absolute;right:10px;"><h5>{{form.prod_quantity}} Remaining in stalk</h5> </div>
             <h2>{{form.Product_brand}}</h2>
             <hr>
             <p>Description: {{form.product_description}}</p>
             <h4>Rs. {{form.product_cost}}</h4>
+            
+            
 
 
                   {% if Item_already_in_cart%}
                   <a href="/show_cart" class="btn btn-warning shadow px-5 py-2 ms-4">Go to cart</a> <a href="/user/{{form.id}}/" class="btn-info shadow px-5 py-2 ms-4">Buy product</a>
-
-
-
-
                    {%else%}
             <form action="/add_to_cart" class="btn-block">
                 {% csrf_token%}
-
                 <input type="hidden" name="prod_id" value="{{form.id}}" id="prod_id">
                 <button type="submit" class="btn-info shadow px-5 py-2 ms-4">Add to cart</button>
-
-                <a href="/user/{{form.id}}/" class="btn-info shadow px-5 py-2 ms-4">Buy product</a>
-
             </form>
+            <form method="Post">
+               <input type="hidden" name="Prod_cost" value="{{form.product_cost}}"/>
+               <input type ="Number" name="quant" placeholder= "quantity" min="1" max="7"/><br><br>
+               {%csrf_token%}
+               <input type="submit"  value= "Buy Now"class="btn-info shadow px-5 py-2 ms-4">
+            </form>
+
+            
 
             {% endif %}
 
