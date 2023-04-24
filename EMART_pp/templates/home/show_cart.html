@@ -2,10 +2,12 @@
 <html lang="en">
 {%extends 'base.html'%}
 {%block baseblock%}
+{%load static%}
 <head>
     <meta charset="UTF-8">
 
     <title>added Product</title>
+
 </head><hr>
 <body>
 
@@ -15,31 +17,38 @@
 <h1 align="center">product</h1>
 
 {% if form %}
-<table border="1px" align="center">
+<table class="table" id ="myTable" align="center">
 
-    <thead>
-    <th>id</th>
-<th>Product brand</th>
-<th>quantity of product</th>
-<th>Cost of Product</th>
-    <th>image</th>
-    </thead>
+  <thead>
+      <th>id</th>
+      <th>Product brand</th>
+      <th>quantity of product</th>
+      <th>Cost of Product</th>
+      <th>Total</th>
+      <th>image</th>
+      <th>Action</th>
+  </thead>
 {% for Showuser in form %}
  <tr>
      <td>{{Showuser.id}}</td>
      <td>{{Showuser.Product_brand}}</td>
-     <td>{{Showuser.quantity}}</td>
-     <td>{{Showuser.product_cost}}</td>
-     <td>{{Showuser.product_image}}</td>
-     <td><img src="{{Showuser.product_image.url}}" height="20px"></td>
+     <td><input id="qunt_id" onkeyup="calc()" type="text" min="1" max="7" value="{{Showuser.quantity}}"/></td>
+     <td><a id="cost_id">{{Showuser.product_cost}}</a></td>
+     <td><a id="total_id">{{Showuser.product_cost}}</a></td>
+     <td><img src="{{Showuser.product_image.url}}" height="20px"/></td>
      <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
-     <td><a href="/" class="btn btn-success">Buy</a></td>
-
-
-
-
  </tr>
 {%endfor%}
+<tr>
+     <td>
+     <td><h5>Total</h5></td>
+     <td>
+     <td>
+     <td><h5 id="final_total">Final</h5></td>
+     <td></td>
+     <td><a href="/detail/{{Showuser.id}}" class="btn btn-success">Place order</a></td>
+
+</tr>
 </table>
         <a href="/" class="btn btn-success">back</a>
 </div>
@@ -54,6 +63,9 @@
 </body>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="{% static 'js/calc.js'%}"></script>
 {%endblock%}
+
 
 </html>

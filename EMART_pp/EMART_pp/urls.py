@@ -30,7 +30,6 @@ urlpatterns = [
     # path('profile/',V2.update_profile),
     path('',views.Home_view),
     path('view/',views.view),
-    path('selection/',views.Selection_View),
     path('login/',views.login),
      path('payment/<int:id>/',views.payment),
     path('detail/<int:id>/',views.detail),

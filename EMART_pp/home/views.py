@@ -13,16 +13,16 @@ def product_show(r):
     form = Product1.objects.all()
     return render(r,'home/product_show.html',{'form':form})
 
+ 
 
-# @login_required()
-# def User_view(r,id):
-#     form=Userform()
-#     if r.method=="POST":
-#         form=Userform(r.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect('/payment')
-#     return render(r,'home/userform.html',{'form':form})
+def logout(r):
+    if r.session.has_key('phone'):
+        del r.session['phone']
+        return redirect('/login')
+
+def view(r):
+    form = Product1.objects.all()
+    return render(r, 'home/product_view.html', {'form': form})
 
 def Seller_view(r):
     form=Sellerform()
@@ -32,6 +32,12 @@ def Seller_view(r):
             form.save()
             return HttpResponseRedirect('/home')
     return render(r,'home/Sellerform.html',{'form':form})
+    
+
+def delete(r,id):
+    abc = Product1.objects.get(id=id)
+    abc.delete()
+    return HttpResponseRedirect('/productshow')
 
 
 
@@ -44,9 +50,6 @@ def Product_view(r):
             return HttpResponseRedirect('/productshow')
     return render(r,'home/Productform.html',{'form':form,})
 
-
-def Selection_View(r):
-    return render(r,'home/selection.html')
 
 def Home_view(r):
     totalitem=0
@@ -69,12 +72,6 @@ def Home_view(r):
             return render(r, 'home/cards.html', data)
     else:
         return redirect('/login')
-def login(r):
-    return render(r,'registration/login.html')
-
-def view(r):
-    form = Product1.objects.all()
-    return render(r, 'home/product_view.html', {'form': form})
 
 
 def update(r,id):
@@ -87,20 +84,12 @@ def update(r,id):
     return render(r,'home/update.html',{'abc':abc})
 
 
-
-
-def delete(r,id):
-    abc = Product1.objects.get(id=id)
-    abc.delete()
-    return HttpResponseRedirect('/productshow')
-
-
-
-
 def detail(r,id):
     totalitem=0
     form = Product1.objects.get(id=id)
     Item_already_in_cart=False
+    r.session['prd_id'] = form.id
+    r.session['cost'] = form.product_cost
     if r.session.has_key('phone'):
         phone=r.session['phone']
         totalitem=len(Cart1.objects.filter(phone=phone))
@@ -116,8 +105,6 @@ def detail(r,id):
 
         }
         if r.method=="POST":
-            r.session['prd_id'] = form.id
-            r.session['cost'] = r.POST['Prod_cost']
             r.session['quant'] = r.POST['quant']
             
             return HttpResponseRedirect(f'/user/{form.id}')
@@ -232,11 +219,6 @@ def login(r):
         return render(r,'home/login.html',data)
 
 
-def logout(r):
-    if r.session.has_key('phone'):
-        del r.session['phone']
-        return redirect('/login')
-
 
 def Cartview(r):
     phone=r.session['phone']
@@ -246,7 +228,7 @@ def Cartview(r):
     for p in product:
         product_image=p.product_image
         product_cost= p.product_cost
-        Cart1(phone=phone,Product_brand=product_name,product_image=product_image,product_cost=product_cost).save()
+        Cart1(id=product_id,phone=phone,Product_brand=product_name,product_image=product_image,product_cost=product_cost).save()
         return redirect(f"/detail/{product_id}")
         
 
