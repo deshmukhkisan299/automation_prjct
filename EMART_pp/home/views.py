@@ -110,14 +110,6 @@ def detail(r,id):
             return HttpResponseRedirect(f'/user/{form.id}')
         return render(r,'product_detail.html',data)    #{'form':form}
 
-
-
-
-# def payment(r):
-#
-#     return render(r,'home/payment_method.html')
-
-
 def User_view(r,id):
     obj=Product1.objects.get(id=id)
     data={
@@ -126,11 +118,6 @@ def User_view(r,id):
         'fetched_quant':r.session['quant'],
         'total': int(obj.product_cost)*int(r.session['quant'])
         }
-     
-        # form=Userform(r.POST)
-        # if form.is_valid():
-        #     form.save()
-        # return HttpResponseRedirect(f"/payment/{obj.id}/")
 
     return render(r,'home/userform.html',data)
 
@@ -225,17 +212,29 @@ def Cartview(r):
     product_id=r.GET.get('prod_id')
     product_name=Product1.objects.get(id=product_id)
     product=Product1.objects.filter(id=product_id)
+    print(product_name.id)
     for p in product:
         product_image=p.product_image
         product_cost= p.product_cost
-        Cart1(id=product_id,phone=phone,Product_brand=product_name,product_image=product_image,product_cost=product_cost).save()
+        Cart1(
+                id=product_id,
+                phone=phone,
+                Product_brand=product_name,
+                product_image=product_image,
+                product_cost=product_cost
+              ).save()
         return redirect(f"/detail/{product_id}")
         
 
 
 def show_add_to_cart(r):
     form=Cart1.objects.all()
-    return render(r,'home/show_cart.html',{'form':form})
+    n= 0
+    for i in form:
+        n+=i.product_cost
+    #for i in form:
+     #   form1 = Product1.objects.get(id = i.id)
+    return render(r,'home/show_cart.html',{'form':form, 'final_sum':n})
 
 
 def remove_cart(r,id):

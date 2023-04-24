@@ -13,58 +13,53 @@
 
 <center>
     <div class="container my-50">
-<div class="shadow p-5>
-<h1 align="center">product</h1>
-
+<div class="shadow p-5">
+   <h1 align="center">Products</h1>
 {% if form %}
 <table class="table" id ="myTable" align="center">
-
-  <thead>
-      <th>id</th>
-      <th>Product brand</th>
-      <th>quantity of product</th>
-      <th>Cost of Product</th>
-      <th>Total</th>
-      <th>image</th>
-      <th>Action</th>
-  </thead>
+<tbody>      
 {% for Showuser in form %}
- <tr>
-     <td>{{Showuser.id}}</td>
-     <td>{{Showuser.Product_brand}}</td>
-     <td><input id="qunt_id" onkeyup="calc()" type="text" min="1" max="7" value="{{Showuser.quantity}}"/></td>
-     <td><a id="cost_id">{{Showuser.product_cost}}</a></td>
-     <td><a id="total_id">{{Showuser.product_cost}}</a></td>
-     <td><img src="{{Showuser.product_image.url}}" height="20px"/></td>
-     <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
- </tr>
+            <tr> 
+                <tr>
+                     <td><h5>{{Showuser.product_name}}</h5><td>
+                     <td><img src="{{Showuser.product_image.url}}" height="100px"/><td>
+                     
+                </tr>
+                <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
+                 <td>Quantity : <input type="number" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="quant(this)" ></td>
+                
+                <td class="netPrice">{{Showuser.product_cost}}</td>
+                 <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
+            </tr>
+            <tr></tr>
+            <hr/>
+            
 {%endfor%}
-<tr>
-     <td>
-     <td><h5>Total</h5></td>
-     <td>
-     <td>
-     <td><h5 id="final_total">Final</h5></td>
-     <td></td>
-     <td><a href="/detail/{{Showuser.id}}" class="btn btn-success">Place order</a></td>
-
-</tr>
-</table>
-        <a href="/" class="btn btn-success">back</a>
-</div>
+        </tbody>
+        <tfoot>
+            <tr>
+               <td></td>
+                <td><h5>Final Total</h5></td>
+                <td id="total">{{final_sum}}<h5></h5></td>
+                <td><a href="/" class="btn btn-success">Continue To Payment</a></td>
+            </tr>
+        </tfoot>
+    </table>
 {%else%}
 <h1> no data found</h1>
     <a href="/" class="btn btn-success">back</a>
 {%endif%}
 
 
+        <a href="/" class="btn btn-success">back</a>
+</div>
     </center>
 
 </body>
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="{% static 'js/calc.js'%}"></script>
+<script src="{% static 'js/calc_jquery.js'%}"></script>
 {%endblock%}
 
 

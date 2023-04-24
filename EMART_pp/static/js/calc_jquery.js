@@ -1,17 +1,21 @@
-$(document).ready(function()
-   {
-      $("tr").each(function()
-      {
-         var totalmarks = 0;
-         $(this).find('.').each(function()
-         {
-            var marks=$(this).text();
-            if(marks.length !==0)
-            {
-               totalmarks+=parseFloat(marks);
+
+var total = document.getElementById("total");
+        var netPrice = document.getElementsByClassName("netPrice");
+        function price(price) {
+            var cal = 0;
+            var amount = price.parentElement.parentElement.children[1].children[0].value;
+            var res = price.parentElement.parentElement.children[2].innerHTML = amount * price.value;
+            for (let i = 0; i < netPrice.length; i++) {
+                cal += parseInt(netPrice[i].innerText);
             }
-         });
-         $(this).find('.').html(totalmarks)
-      });
-      
-   });
+            total.innerHTML = cal;
+        }
+        function quant(amount) {
+            var cal = 0;
+            var price = quant.parentElement.parentElement.children[0].children[0].value;
+            var res = quant.parentElement.parentElement.children[2].innerHTML = price * amount.value;
+            for (let i = 0; i < netPrice.length; i++) {
+                cal += parseInt(netPrice[i].innerText);
+            }
+            total.innerHTML = cal;
+        }

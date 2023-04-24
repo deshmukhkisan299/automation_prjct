@@ -8,7 +8,8 @@
             <img   src="{{form.product_image.url}}" alt="" class="img-fluid img-thumbnail">
         </div>
         <div class="col-sm-5 offset-sm-1">
-            <div style="position:absolute;right:10px;"><h5>{{form.prod_quantity}} Remaining in stalk</h5> </div>
+            <div style="position:absolute;right:10px;">
+            <h5>{{form.prod_quantity}} Remaining in stalk</h5> </div>
             <h2>{{form.Product_brand}}</h2>
             <hr>
             <p>Description: {{form.product_description}}</p>
@@ -24,11 +25,12 @@
                 {% csrf_token%}
                 <input type="hidden" name="prod_id" value="{{form.id}}" id="prod_id">
                 <button type="submit" class="btn-info shadow px-5 py-2 ms-4">Add to cart</button>
-            </form>
+            </form><br>
 
             
 
             {% endif %}
+        <a href="/" class="btn btn-success">back</a>
 
         </div>
     </div>
