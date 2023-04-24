@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .helptext{display:none;}
+</style>
+<div class="container">
+<body><center><h1>SIGN-UP PAGE</h1>
+  <form method="POST" class="shadow p-5">
+    {{form.as_p}}
+    {%csrf_token%}
+    <input type="submit">
+<div class="test-center text-primary fw-bold">
+    <small> Existing User to EMART World ?</small>
+    <a href="/login" class="text-danger"> Login</a>
+</div>
+  </form>
+</center>
+</body>
+    </div>
+{%endblock%}
+</html>

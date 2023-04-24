@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+<head>
+    <meta charset="UTF-8">
+
+    <title>Place Order</title>
+</head>
+<style>
+.form-check{
+height:50px;}
+
+</style>
+
+<body>
+
+<h1 align="center">Place Order </h1><br>
+<div class="container" align="center">
+         <div>
+        Cost     :  {{fetched_cost}}&nbsp;&nbsp;&nbsp;&nbsp;
+        Quantity : {{fetched_quant}}<br>
+        Total Cost: {{total}}<br><br>
+        <h3>Payment Method</h3>
+        </div>
+        <input type="hidden" value="{{form.product_cost}}" name="product_cost"/><br>
+        <div class="form-check">
+           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+           <label class="form-check-label" for="flexRadioDefault1">
+             Wallet
+           </label>
+         </div>
+         <div class="form-check">
+           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+           <label class="form-check-label" for="flexRadioDefault2">
+             Gpay
+           </label>
+         </div>
+         <div class="form-check">
+           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+           <label class="form-check-label" for="flexRadioDefault2">
+             Phonepe
+           </label>
+         </div>
+         <div class="form-check">
+           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+           <label class="form-check-label" for="flexRadioDefault2">
+             Cards
+           </label>
+         </div>
+         <div class="form-check">
+           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+           <label class="form-check-label" for="flexRadioDefault2">
+             Cash On Delivery
+           </label>
+         </div><br><br>
+        {% csrf_token %}
+        <a href="/" class="btn btn-success">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a  type="submit" href= "/success" class="btn btn-success">Submit<a/>
+        
+
+</div>
+
+
+</body>
+{%endblock%}
+</html>
+
+
+
