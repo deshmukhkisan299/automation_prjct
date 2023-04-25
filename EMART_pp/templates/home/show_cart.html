@@ -11,7 +11,7 @@
 </head><hr>
 <body>
 <style>
-.item_row{
+.row_span{
 background-color:red;
 padding:10px;
 margin:auto;
@@ -26,6 +26,7 @@ margin:auto;
 <table class="table" id ="myTable" align="center">
 <tbody>      
 {% for Showuser in form %}
+
             <tr>
                     <td><div>
                         <td><h5>{{Showuser.product_name}}</h5><td>
@@ -37,14 +38,17 @@ margin:auto;
             </tr>
             <form method="POST">
             <tr>
-                    <div>    
+            <div class="row_span">
+                       
                    <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
                     <td>Quantity : <input type="text" name="qun" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="amount(this)" /></td>
                    
                    <td class="netPrice">{{Showuser.product_cost}}</td>                    
-                    </div>
+                    
                <input type="hidden" name="p_id" value="{{Showuser.id}}"/>
+            </div>
             </tr>
+      
             <hr/>
             
 {%endfor%}

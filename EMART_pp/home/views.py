@@ -230,8 +230,28 @@ def Cartview(r):
 def show_add_to_cart(r):
     form=Cart1.objects.all()
     if r.method=="POST":
-        vari = r.POST 
-        print(type(vari))
+        qun = [int(i) for i in r.POST.getlist('qun')]
+        var2 = r.POST.getlist('p_id')
+        for i in var2:
+            data = myconn.execute(f"Select product_cost from Home_Product1 where id = {i}")
+            costs = [i[0] for i in data]
+            total_cost = {i:costs[j]*qun[j] for j in range(len(costs))}
+                
+            print(total_cost)
+    # for i in my_dict[0]:
+        # print("quantity", i['qun'])
+        # print("ids", i['p_id'])
+        
+    
+    
+        # a = [i for i in vari['qun']]
+        # b = [i for i in vari['p_id']]
+    
+        #for i, j in vari.items():
+            
+            # ids.append(i)
+            # quans.append(j)
+    # print("result", ids, quans)
         # prdid_list = r.POST['p_id']
         # quant_list = r.POST['qun']    
         # print(quant_list, prdid_list)
