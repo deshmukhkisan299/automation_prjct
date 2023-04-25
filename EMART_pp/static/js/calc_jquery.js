@@ -1,4 +1,3 @@
-
 var total = document.getElementById("total");
         var netPrice = document.getElementsByClassName("netPrice");
         function price(price) {
@@ -10,10 +9,10 @@ var total = document.getElementById("total");
             }
             total.innerHTML = cal;
         }
-        function quant(amount) {
+        function amount(amount) {
             var cal = 0;
-            var price = quant.parentElement.parentElement.children[0].children[0].value;
-            var res = quant.parentElement.parentElement.children[2].innerHTML = price * amount.value;
+            var price = amount.parentElement.parentElement.children[0].children[0].value;
+            var res = amount.parentElement.parentElement.children[2].innerHTML = price * amount.value;
             for (let i = 0; i < netPrice.length; i++) {
                 cal += parseInt(netPrice[i].innerText);
             }

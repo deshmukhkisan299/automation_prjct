@@ -10,7 +10,14 @@
 
 </head><hr>
 <body>
+<style>
+.item_row{
+background-color:red;
+padding:10px;
+margin:auto;
+}
 
+</style>
 <center>
     <div class="container my-50">
 <div class="shadow p-5">
@@ -19,23 +26,26 @@
 <table class="table" id ="myTable" align="center">
 <tbody>      
 {% for Showuser in form %}
-            <tr> 
-                <tr>
-                     <td><h5>{{Showuser.product_name}}</h5><td>
-                     <td><img src="{{Showuser.product_image.url}}" height="100px"/><td>
-                     
-                </tr>
-                <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
-                 <td>Quantity : <input type="number" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="quant(this)" ></td>
-                
-                <td class="netPrice">{{Showuser.product_cost}}</td>
-                 <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
+            <tr>
+                   <tr>
+                        <td><h5>{{Showuser.product_name}}</h5><td>
+                        <td><img src="{{Showuser.product_image.url}}" height="100px"/><td>
+                        
+                   </tr>
+                   <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
+                    <td>Quantity : <input type="text" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="amount(this)" /></td>
+                   
+                   <td class="netPrice">{{Showuser.product_cost}}</td>
+                   
+                   
+                    <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
+               
             </tr>
             <tr></tr>
             <hr/>
             
 {%endfor%}
-        </tbody>
+</tbody>
         <tfoot>
             <tr>
                <td></td>
