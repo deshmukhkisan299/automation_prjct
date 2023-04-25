@@ -229,12 +229,13 @@ def Cartview(r):
 
 def show_add_to_cart(r):
     form=Cart1.objects.all()
-    n= 0
-    for i in form:
-        n+=i.product_cost
-    #for i in form:
-     #   form1 = Product1.objects.get(id = i.id)
-    return render(r,'home/show_cart.html',{'form':form, 'final_sum':n})
+    if r.method=="POST":
+        vari = r.POST 
+        print(type(vari))
+        # prdid_list = r.POST['p_id']
+        # quant_list = r.POST['qun']    
+        # print(quant_list, prdid_list)
+    return render(r,'home/show_cart.html',{'form':form})
 
 
 def remove_cart(r,id):

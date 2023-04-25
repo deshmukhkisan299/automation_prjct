@@ -1,4 +1,5 @@
 var total = document.getElementById("total");
+        var check = document.getElementsByClassName("quan_class");
         var netPrice = document.getElementsByClassName("netPrice");
         function price(price) {
             var cal = 0;
@@ -8,6 +9,7 @@ var total = document.getElementById("total");
                 cal += parseInt(netPrice[i].innerText);
             }
             total.innerHTML = cal;
+           
         }
         function amount(amount) {
             var cal = 0;

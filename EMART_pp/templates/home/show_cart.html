@@ -27,21 +27,24 @@ margin:auto;
 <tbody>      
 {% for Showuser in form %}
             <tr>
-                   <tr>
+                    <td><div>
                         <td><h5>{{Showuser.product_name}}</h5><td>
                         <td><img src="{{Showuser.product_image.url}}" height="100px"/><td>
+                        <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">X</a></td>
                         
-                   </tr>
-                   <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
-                    <td>Quantity : <input type="text" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="amount(this)" /></td>
-                   
-                   <td class="netPrice">{{Showuser.product_cost}}</td>
-                   
-                   
-                    <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">remove</a></td>
-               
+                    
+                    </div></td>
             </tr>
-            <tr></tr>
+            <form method="POST">
+            <tr>
+                    <div>    
+                   <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
+                    <td>Quantity : <input type="text" name="qun" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="amount(this)" /></td>
+                   
+                   <td class="netPrice">{{Showuser.product_cost}}</td>                    
+                    </div>
+               <input type="hidden" name="p_id" value="{{Showuser.id}}"/>
+            </tr>
             <hr/>
             
 {%endfor%}
@@ -50,10 +53,12 @@ margin:auto;
             <tr>
                <td></td>
                 <td><h5>Final Total</h5></td>
-                <td id="total">{{final_sum}}<h5></h5></td>
-                <td><a href="/" class="btn btn-success">Continue To Payment</a></td>
+                <td id="total">{{final_sum}}</td>
+                <td><input type="submit" class="btn btn-success" value="Continue To Payment"/></td>
             </tr>
         </tfoot>
+        {%csrf_token%}
+            </form>
     </table>
 {%else%}
 <h1> no data found</h1>
@@ -66,7 +71,6 @@ margin:auto;
     </center>
 
 </body>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="{% static 'js/calc_jquery.js'%}"></script>
