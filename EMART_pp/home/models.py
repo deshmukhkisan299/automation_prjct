@@ -10,7 +10,6 @@ class Usermode(models.Model):
     user_address = models.CharField(max_length=60)
 
 class Seller_Model(models.Model):
-
     Seller_id = models.CharField(max_length=30)
     company_business_name = models.CharField(max_length=30)
     Seller_name = models.CharField(max_length=30)
@@ -18,7 +17,7 @@ class Seller_Model(models.Model):
     Seller_email = models.EmailField()
     Seller_address = models.CharField(max_length=60)
 
-class Product1(models.Model):
+class Product_details(models.Model):
     product_name = models.CharField(max_length=30)
     Product_brand = models.CharField(max_length=30)
     Product_category = models.CharField(max_length=30)
@@ -27,6 +26,15 @@ class Product1(models.Model):
     product_image = models.ImageField(upload_to='static/media/')
     product_releasedate = models.DateField()
     product_description = models.CharField(max_length=60)
+    Seller_mob_no = models.BigIntegerField(default=1)
+
+class Cart1(models.Model):
+    phone=models.CharField(max_length=10)
+    Product_brand=models.ForeignKey(Product_details,on_delete=models.CASCADE)
+    product_image=models.ImageField(null=True,blank=True)
+    quantity=models.PositiveIntegerField(default=1)
+    product_cost=models.IntegerField(default=0)
+
 
 
 class Customer1(models.Model):
@@ -47,13 +55,6 @@ class Customer1(models.Model):
 
 
 
-
-class Cart1(models.Model):
-    phone=models.CharField(max_length=10)
-    Product_brand=models.ForeignKey(Product1,on_delete=models.CASCADE)
-    product_image=models.ImageField(null=True,blank=True)
-    quantity=models.PositiveIntegerField(default=1)
-    product_cost=models.IntegerField(default=0)
 
 
 

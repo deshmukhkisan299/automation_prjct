@@ -11,10 +11,79 @@
 <div class="container my-30" align="center">
 <div class="shadow p-4">
 <h1 align="center">Product Form </h1>
-    <form method="post" enctype="multipart/form-data">
-        {{form.as_p}}
+       <form method="post" enctype="multipart/form-data">
+             <label for="id_product_name">Product name:</label>
+             <input type="text" name="product_name" maxlength="30" required id="id_product_name">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_Product_brand">Product brand:</label>
+             <input type="text" name="Product_brand" maxlength="30" required id="id_Product_brand">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_Product_category">Product category:</label>
+             <input type="text" name="Product_category" maxlength="30" required id="id_Product_category">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_product_cost">Product cost:</label>
+             <input type="number" name="product_cost" required id="id_product_cost">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_prod_quantity">Prod quantity:</label>
+             <input type="number" name="prod_quantity" value="1" required id="id_prod_quantity">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_product_image">Product image:</label>
+             <input type="file" name="product_image" accept="image/*" required id="id_product_image">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_product_releasedate">Product releasedate:</label>
+             <input type="text" name="product_releasedate" required id="id_product_releasedate">
+             
+             
+           </p>
+
+           
+           <p>
+             <label for="id_product_description">Product description:</label>
+             <input type="text" name="product_description" maxlength="60" required id="id_product_description">
+             
+             
+           </p>
+
+           
+             <input type="hidden" name="Seller_mob_no" value="{{num}}" min="-9223372036854775808" max="9223372036854775807" required id="id_Seller_mob_no">
+             
+             
+               
+             
+           
         {% csrf_token %}
-      <a href="/" class="btn btn-success">Back</a>           <input type="submit" value="submit">
+      <input type="submit" value="submit">
+      <a href="/" class="btn btn-success">Back</a><p></p>
     </form>
 </div>
 </div><hr>

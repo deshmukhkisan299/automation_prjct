@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usermode, Seller_Model, Product1
+from .models import Usermode, Seller_Model, Product_details
 
 
 class Userform(forms.ModelForm):
@@ -15,7 +15,7 @@ class Sellerform(forms.ModelForm):
 class Productform(forms.ModelForm):
 
     class Meta:
-        model = Product1
+        model = Product_details
         fields = '__all__'
 
 

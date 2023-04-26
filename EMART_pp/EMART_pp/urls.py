@@ -15,30 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from home import views
-# from Login import views as V2
-from signup import views as V1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/<int:id>/', views.User_view),
-    path('seller/', views.Seller_view),
-    path('product/', views.Product_view),
-    path('productshow/', views.product_show),
-    path('sign_up/',V1.sign_up),
-    path('sign_up1/',views.SignUp1),
     # path('profile/',V2.update_profile),
-    path('',views.Home_view),
-    path('view/',views.view),
-    path('login/',views.login),
-    path('detail/<int:id>/',views.detail),
-    path('add_to_cart/',views.Cartview),
-    path("update/<id>/", views.update),
-    path("delete/<id>/", views.delete),
-    path("remove_cart/<id>/", views.remove_cart),
-    path("login/", views.login),
-    path("logout/", views.logout),
-    path("show_cart/", views.show_add_to_cart),
-    path("success/", views.success)
+    path('',include('home.urls')),
+    path('signup/',include('signup.urls')),
+    
 ]
 
