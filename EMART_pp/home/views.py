@@ -88,8 +88,6 @@ def detail(r,id):
     totalitem=0
     form = Product1.objects.get(id=id)
     Item_already_in_cart=False
-    r.session['prd_id'] = form.id
-    r.session['cost'] = form.product_cost
     if r.session.has_key('phone'):
         phone=r.session['phone']
         totalitem=len(Cart1.objects.filter(phone=phone))
@@ -120,17 +118,6 @@ def User_view(r,id):
         }
 
     return render(r,'home/userform.html',data)
-
-
-
-
-def payment(r,id):
-    obj=Product1.objects.get(id=id)
-    Total_cost=calc.total(det['qunt'],det['cost'])
-    return render(r,'home/payment_method.html',{'obj':obj,'total':Total_cost})
-
-
-
 
 def SignUp1(r):
     obj=Customer1.objects.all()
@@ -226,36 +213,31 @@ def Cartview(r):
         return redirect(f"/detail/{product_id}")
         
 
-
 def show_add_to_cart(r):
     form=Cart1.objects.all()
-    if r.method=="POST":
-        qun = [int(i) for i in r.POST.getlist('qun')]
-        var2 = r.POST.getlist('p_id')
-        for i in var2:
-            data = myconn.execute(f"Select product_cost from Home_Product1 where id = {i}")
-            costs = [i[0] for i in data]
-            total_cost = {i:costs[j]*qun[j] for j in range(len(costs))}
-                
-            print(total_cost)
-    # for i in my_dict[0]:
-        # print("quantity", i['qun'])
-        # print("ids", i['p_id'])
-        
+    data = [] #list of dictionaries of data
     
-    
-        # a = [i for i in vari['qun']]
-        # b = [i for i in vari['p_id']]
-    
-        #for i, j in vari.items():
+    for i in form:
+        result = myconn.execute(f"select * from home_Product1 where id={i.Product_brand_id}")
+        for i in result:
+            data.append(i)
             
-            # ids.append(i)
-            # quans.append(j)
-    # print("result", ids, quans)
-        # prdid_list = r.POST['p_id']
-        # quant_list = r.POST['qun']    
-        # print(quant_list, prdid_list)
-    return render(r,'home/show_cart.html',{'form':form})
+    if r.method=="POST":
+        if '' not in r.POST.getlist('qun'):
+            qun = [int(i) for i in r.POST.getlist('qun')]
+            var2 = r.POST.getlist('p_id')
+            for i,j in enumerate(var2):
+                data = myconn.execute(f"Select product_cost from Home_Product1 where id = {j}")
+                if qun[i] != 0:
+                    costs = [i for i in data]
+                    total_cost = {j:[costs[0][0]*qun[i],qun[i]]}
+                    myconn.execute(f"delete home_cart1 where id={j}" )
+                    myconn.commit()
+                    print(total_cost)
+                    return HttpResponseRedirect("/success")
+            
+          
+    return render(r,'home/show_cart.html',{'form':data})
 
 
 def remove_cart(r,id):
@@ -264,20 +246,9 @@ def remove_cart(r,id):
     return HttpResponseRedirect('/show_cart')
     
 def success(r):
-    cls_s_id = r.session['prd_id']
-    cls_quant_id = r.session['quant']
-    obj = Product1.objects.get(id=cls_s_id)
-    remaining_quant = obj.prod_quantity-int(cls_quant_id)
-    myconn.execute(f'update home_product1 set prod_quantity={remaining_quant} where id= {cls_s_id}')
-    myconn.commit()
-    myconn.close()
-    del cls_s_id
-    del cls_quant_id
-    del r.session['quant']
     
     
-    
-    print('done')
+
     return render(r, 'home/success.html')
     
     

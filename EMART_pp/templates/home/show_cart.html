@@ -12,8 +12,7 @@
 <body>
 <style>
 .row_span{
-background-color:red;
-padding:10px;
+background-color:#cb86d1;
 margin:auto;
 }
 
@@ -22,35 +21,36 @@ margin:auto;
     <div class="container my-50">
 <div class="shadow p-5">
    <h1 align="center">Products</h1>
+            <hr/>
+            <hr/>
 {% if form %}
 <table class="table" id ="myTable" align="center">
 <tbody>      
 {% for Showuser in form %}
 
-            <tr>
-                    <td><div>
-                        <td><h5>{{Showuser.product_name}}</h5><td>
-                        <td><img src="{{Showuser.product_image.url}}" height="100px"/><td>
-                        <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">X</a></td>
+            <tr>  
+                        <td>
+                        <p>Product Name : {{Showuser.product_name}}</p>                       
+                        <p>Product Brand : {{Showuser.Product_brand}}</p> 
+                        <p>Product Catagory : {{Showuser.Product_category}}<p>            </td>                       
+                        <td><img src="/{{Showuser.product_image}}" height="100px"/></td>
+                        <td><p>Product Discription : {{Showuser.product_description}}<p></td>
                         
                     
-                    </div></td>
             </tr>
             <form method="POST">
-            <tr>
-            <div class="row_span">
+            <tr class="row_span">
+            
                        
                    <td>Price : <input disabled="true" onkeyup="price(this)" value="{{Showuser.product_cost}}"/></td>
-                    <td>Quantity : <input type="text" name="qun" min="1" max="7" value="1" placeholder= 'quantity' onkeyup="amount(this)" /></td>
+                    <td>Quantity : <input type="text" name="qun" min="0" max="7" value="0" placeholder= 'quantity' onkeyup="amount(this)" /></td>
                    
-                   <td class="netPrice">{{Showuser.product_cost}}</td>                    
-                    
+                   <td class="netPrice">0</td>                    
+                   <td><a href="/remove_cart/{{Showuser.id}}" class="btn btn-danger">Remove</a></td>
                <input type="hidden" name="p_id" value="{{Showuser.id}}"/>
-            </div>
-            </tr>
-      
-            <hr/>
             
+            </tr>
+           
 {%endfor%}
 </tbody>
         <tfoot>
