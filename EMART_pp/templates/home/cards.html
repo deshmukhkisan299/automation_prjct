@@ -9,21 +9,26 @@
 <body>
 <div class = "container">
 <div class="row">
+
    {% for product in data %}
-    <div class="card mx-auto mb-3" style="width: 10rem">
+    <div class="card mx-auto mb-3" style="width: 20rem">
         <a href="/detail/{{product.id}}" class="btn">
             <div class="item">
                <img class="card-img-top" src="{{product.product_image.url}}"  alt="...">
             </div>
          </a>
-  <div class="card-body">
-    <h5 class="card-title">{{product.Product_brand}}</h5>
-    <p class="card-text">Rs. {{product.product_cost}}</p>
+         
+        <div class="card-body">
+          <h5 class="card-title">{{product.Product_brand}}</h5>
+          <p class="card-text">Rs. {{product.product_cost}}</p>
+         </div>
+    </div>
+    
+{%endfor%}
   </div>
 </div>
 
 
-{%endfor%}
 </body>
 {%endblock%}
 </html>

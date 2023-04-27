@@ -81,22 +81,23 @@ def login(r):
         return render(r,'home/login.html',data)
 
 def login_decor(f):
-    try:
-        def inner(r):
-            if r.session.has_key('phone'):
-                result = f(r) 
-                return result
-            else:
-                return HttpResponseRedirect('/login')
-        return inner
-    except:
-        def inner(r, id):
-            if r.session.has_key('phone'):
-                result = f(r, id) 
-                return result
-            else:
-                return HttpResponseRedirect('/login')
-        return inner
+    def inner(r):
+        if r.session.has_key('phone'):
+            result = f(r) 
+            return result
+        else:
+            return HttpResponseRedirect('/login')
+    return inner
+
+def login_decor_id(f):    
+    def inner(r, id):
+        if r.session.has_key('phone'):
+            result = f(r, id) 
+            return result
+        else:
+            return HttpResponseRedirect('/login')
+    return inner
+
 
 def logout(r):
     del r.session['phone']
@@ -157,8 +158,7 @@ def update(r,id):
             return HttpResponseRedirect('/productshow')
     return render(r,'home/update.html',{'abc':abc})
 
-
-@login_decor
+@login_decor_id
 def detail(r,id):
     totalitem=0
     form = Product_details.objects.get(id=id)
@@ -181,18 +181,6 @@ def detail(r,id):
         
         return HttpResponseRedirect(f'/user/{form.id}')
     return render(r,'product_detail.html',data)    #{'form':form}
-
-@login_decor
-def User_view(r,id):
-    obj=Product_details.objects.get(id=id)
-    data={
-        'obj':obj,
-        'fetched_cost': obj.product_cost,
-        'fetched_quant':r.session['quant'],
-        'total': int(obj.product_cost)*int(r.session['quant'])
-        }
-
-    return render(r,'home/userform.html',data)
 
 
 def Cartview(r):
@@ -224,6 +212,9 @@ def show_add_to_cart(r):
             data.append(i)
             
     if r.method=="POST":
+        final_cost = 0
+        total_quant = 0 
+        payment_lists = []
         if '' not in r.POST.getlist('qun'):
             qun = [int(i) for i in r.POST.getlist('qun')]
             var2 = r.POST.getlist('p_id')
@@ -231,14 +222,24 @@ def show_add_to_cart(r):
                 data = myconn.execute(f"Select product_cost from Home_Product_details where id = {j}")
                 if qun[i] != 0:
                     costs = [i for i in data]
-                    total_cost = {j:[costs[0][0]*qun[i],qun[i]]}
-                    myconn.execute(f"delete home_cart1 where id={j}" )
-                    myconn.commit()
-                    print(total_cost)
-                    return HttpResponseRedirect("/success")
-            
-          
+                    payment_details = {j:[costs[0][0]*qun[i],qun[i]]}
+                    payment_lists.append(payment_details)
+                    # myconn.execute(f"delete home_cart1 where id={j}" )
+                    # myconn.commit()
+                    final_cost += costs[0][0]*qun[i]
+                    total_quant += qun[i]
+                    
+
+        calculated_data={
+        'fetched_quant':total_quant,
+        'total': final_cost,
+        'payment':payment_lists
+        }
+        print(calculated_data)
+        return render(r, 'home/userform.html', calculated_data)        
     return render(r,'home/show_cart.html',{'form':data})
+def User_view(r):
+    pass
 
 
 def remove_cart(r,id):
@@ -247,10 +248,9 @@ def remove_cart(r,id):
     return HttpResponseRedirect('/show_cart')
     
 def success(r):
-    
+    pass
     
 
-    return render(r, 'home/success.html')
     
     
     
