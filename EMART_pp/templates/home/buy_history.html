@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+{%extends 'base.html'%}
+{%block baseblock%}
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+
+    <title>Buy History</title>
+
+</head><hr>
+<body>
+<style>
+.row_span{
+background-color:#cb86d1;
+margin:auto;
+}
+
+</style>
+<center>
+    <div class="container my-50">
+<div class="shadow p-5">
+   <h1 align="center">Buy History</h1>
+            <hr/>
+            <hr/>
+{% if form %}
+<table class="table" id ="myTable" align="center">
+<tbody>      
+{% for Showuser2 in form %}
+  {%for Showuser in Showuser2%}
+  {%for date in dates%}
+
+            <tr class="row_span">
+            
+                       
+                  
+             
+            </tr>
+            <tr>  
+                                  
+                        <td><img src="/{{Showuser.product_image}}" height="100px"/></td>
+                        <td>
+                           <p>Product Name : {{Showuser.product_name}}</p>                       
+                           <p>Product Brand : {{Showuser.Product_brand}}</p> 
+                           <p>Product Catagory : {{Showuser.Product_category}}<p>
+                           <p>Product Price : {{Showuser.product_cost}}<p>
+                           <p>Product Price : {{date}} <p>
+                             
+                        </td> 
+                        <td>
+                        <p>Product Discription : {{Showuser.product_description}}<p>
+                        </td>
+                        
+                    
+            </tr>
+  {%endfor%}
+ {%endfor%}  
+{%endfor%}
+</tbody>
+    </table>
+{%else%}
+<h1> no data found</h1>
+    <a href="/" class="btn btn-success">back</a>
+{%endif%}
+
+
+        <a href="/" class="btn btn-success">back</a>
+</div>
+    </center>
+
+</body>
+</div>
+<script src="{% static 'js/calc_jquery.js'%}"></script>
+{%endblock%}
+
+
+</html>

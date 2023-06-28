@@ -2,22 +2,30 @@
 {%extends 'base.html'%}{%block baseblock%}
 <head>    <meta charset="UTF-8">
     <title>Customer login</title></head>
-<body><div class="Container">
-    <div class="row my-3">        <div class="col-sm-6 offset-sm-3">
+<body><div class="Container"><center>
+    <div class="row my-3">        
+    <div class="col-sm-6 offset-sm-3">
             <h3> Customer login</h3>
             <form method="POST" action="/login/" class="shadow p-5">
-                {%csrf_token%}                {%if error %}
-                <div class="alert alert-danger" role="alert">{{error}}</div>                {% endif%}
-                 <div class="form-group" >
-                    <labal for="" class="form-control-lg">Mobile No.</labal>                    <input type="text" name="phone" id="" value="{{value.phone}}" class="form-contrl" placeholder="Enter Mobile No."></input>
+                {%csrf_token%}                
+                   {%if error %}
+                     <div class="alert alert-danger" role="alert">{{error}}</div>                
+                   {% endif%}
+                 <div class="form-group" />
+                    <labal for="" class="form-control-lg">Mobile No.</labal>                    
+                    <input type="text" name="phone" value="{{value.phone}}" class="form-contrl" placeholder="Enter Mobile No."></input>
+                    <p></p>
+                    <labal for="" class="form-control-lg">Password.</labal> 
+                    <input type="password" name="password" value="{{value.password}}" class="form-contrl" placeholder="Enter Mobile No."></input>
                 </div>
-                <div class="form-group pt-4">                    <input class="btn btn-sm btn-info" type="submit" value="login"></input>
+                <div class="form-group pt-4">                    
+                <input class="btn btn-sm btn-info" type="submit" value="login"></input>
                 </div>
-                <div class="test-center text-primary fw-bold">                <small>new User to EMART Product</small>
+                <div class="test-center text-primary fw-bold">                <small>New User? Click Here to SignUp</small>
                 <a href="/sign_up1" class="text-danger"> SignUp</a>                </div>
             </form>
         </div>
-    </div>
+    </div></center>
 </div>
 </body>{%endblock%}
 </html>

@@ -37,26 +37,20 @@ class Cart1(models.Model):
 
 
 
-class Customer1(models.Model):
-    name=models.CharField(max_length=50)
+class User_Model(models.Model):
+    username=models.CharField(max_length=50)
+    password = models.CharField(max_length = 20)
     phone=models.CharField(max_length=10)
-
-
+    email_id = models.EmailField()
+    address_field = models.CharField(max_length=50)
+    dob = models.DateField()
     def register(self):
         self.save()
-
-
-
     def isExists(self):
-        if Customer1.objects.filter(phone=self.phone):
+        if User_Model.objects.filter(phone=self.phone):
             return True
         else:
             False
-
-
-
-
-
 
 STATUS_CHOICE = (
     ('Accepted','Accepted'),
@@ -64,13 +58,7 @@ STATUS_CHOICE = (
     ('On the Way','On The Way'),
     ('Delivered','Delivered'),
     ('Cancel','Cancel')
-)
-
-
-
-
-
-
+ )
 class order_details(models.Model):
     user=models.IntegerField(default=True)
     Product_name= models.CharField(max_length=250)
@@ -81,5 +69,10 @@ class order_details(models.Model):
     status=models.CharField(max_length=50,default='pendding',choices=STATUS_CHOICE)
 
 
+class sales_detailss(models.Model):
+    record_date = models.DateField()
+    buyer_id = models.BigIntegerField()
+    product_id = models.IntegerField()
+    prd_quant = models.IntegerField()
 
 

@@ -6,26 +6,39 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head><hr>
+<style>
+.card-body{
+width:100%;
+position:absolute;
+bottom:0px;
+background-color:white;
+opacity: 0.9;
+}
+
+</style>
 <body>
-<div class = "container">
 <div class="row">
 
    {% for product in data %}
-    <div class="card mx-auto mb-3" style="width: 20rem">
-        <a href="/detail/{{product.id}}" class="btn">
+    <div class="card mx-auto mb-3" style="width: 15rem">
+   <a href="/detail/{{product.id}}" class="btn">
+        
             <div class="item">
                <img class="card-img-top" src="{{product.product_image.url}}"  alt="...">
             </div>
-         </a>
+         
          
         <div class="card-body">
-          <h5 class="card-title">{{product.Product_brand}}</h5>
-          <p class="card-text">Rs. {{product.product_cost}}</p>
+         <a class="card-title">{{product.product_name}}</a>
+          <a>{{product.Product_brand}}</a><br>
+          <a>Rs. {{product.product_cost}}</a>
          </div>
+         
+    </a>
     </div>
     
+    
 {%endfor%}
-  </div>
 </div>
 
 
